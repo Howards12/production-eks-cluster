@@ -16,9 +16,9 @@ spec:
       containers:
       - name: whatsapp-container
         # Pointing exactly to the repository and tag from your screenshot
-        image: docker.io/ikonoim/whatsapp:v26.0.5rc1
+        image: docker.io/ikonoim/whatsapp:v26.05.2rc1
         ports:
-        - containerPort: 80 # Adjust if this specific app listens on a different internal port
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
