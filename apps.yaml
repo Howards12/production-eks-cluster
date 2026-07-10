@@ -1,0 +1,23 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: pod-source
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/Howards12/production-eks-cluster.git
+  ref:
+    branch: main
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: live-apps-sync
+  namespace: flux-system
+spec:
+  interval: 2m
+  path: "./deployments" # Tells Flux to watch this folder for your apps
+  prune: true           # If you delete a manifest file from Git, Flux automatically deletes it from EKS
+  sourceRef:
+    kind: GitRepository
+    name: pod-source
